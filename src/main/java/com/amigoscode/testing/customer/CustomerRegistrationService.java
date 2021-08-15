@@ -1,18 +1,14 @@
 package com.amigoscode.testing.customer;
 
-<<<<<<<<< Temporary merge branch 1
-=========
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>>>> Temporary merge branch 2
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CustomerRegistrationService {
 
-<<<<<<<<< Temporary merge branch 1
-    public void registerNewCustomer(CustomerRegistrationRequest request) {
-
-=========
 
     private final CustomerRepository customerRepository;
 
@@ -22,6 +18,26 @@ public class CustomerRegistrationService {
     }
 
     public void registerNewCustomer(CustomerRegistrationRequest request) {
->>>>>>>>> Temporary merge branch 2
+
+        String actualPhoneNumber = request.getCustomer().getPhoneNumber();
+        Optional<Customer> customerOptional = customerRepository
+                .selectCustomerByPhoneNumber(actualPhoneNumber);
+
+        if(customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+
+            if (customer.getName().equals(request.getCustomer().getName())) {
+                return;
+            }
+            throw new IllegalStateException(String.format("phone number [%s] is already taken", actualPhoneNumber));
+
+        }
+
+        if(request.getCustomer().getId() == null) {
+            request.getCustomer().setId(UUID.randomUUID());
+        }
+
+        customerRepository.save(request.getCustomer());
+
     }
 }
