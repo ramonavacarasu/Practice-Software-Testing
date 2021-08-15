@@ -1,28 +1,31 @@
 package com.amigoscode.testing.customer;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<<<<<<<<< Temporary merge branch 1
+import javax.validation.constraints.NotBlank;
+import java.lang.reflect.Constructor;
+import java.util.UUID;
 
-import javax.persistence.Column;
+public class Customer {
+=========
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
-@JsonIgnoreProperties(value = {"id"}, allowGetters = true)
 public class Customer {
 
     @Id
-    @NotNull
+>>>>>>>>> Temporary merge branch 2
     private UUID id;
 
     @NotBlank
-    @Column(nullable = false)
     private String name;
+<<<<<<<<< Temporary merge branch 1
+=========
 
     @NotBlank
-    @Column(nullable = false, unique = true)
+>>>>>>>>> Temporary merge branch 2
     private String phoneNumber;
 
     public Customer(UUID id, String name, String phoneNumber) {
@@ -31,9 +34,12 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+<<<<<<<<< Temporary merge branch 1
+=========
     public Customer() {
     }
 
+>>>>>>>>> Temporary merge branch 2
     public UUID getId() {
         return id;
     }
