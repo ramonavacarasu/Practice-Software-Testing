@@ -24,7 +24,6 @@ public class PaymentService {
         this.cardPaymentCharger = cardPaymentCharger;
     }
 
-    @Autowired
     void chargeCard(UUID customerId, PaymentRequest paymentRequest) {
 
         // 1. Does customer exists if not throw
@@ -62,7 +61,7 @@ public class PaymentService {
 
         paymentRepository.save(paymentRequest.getPayment());
 
-        // 6. Send SMS
+        // 6. TODO: Send SMS
 
     }
 
